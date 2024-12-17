@@ -9,6 +9,34 @@ function App() {
     { id: 5, name: "Cas", age: 21 },
   ]);
 
+  const [newName, setNewName] = useState("");
+  const [newAge, setNewAge] = useState("");
+
+  const handleAddUser = (e) => {
+    e.preventDefault(); // Prevent page reload on form submit
+    if (newName.trim() === "" || newAge.trim() === "") {
+      alert("Please provide both name and age");
+      return;
+    }
+    if (newName.length > 20) {
+      alert("Name cannot exceed 20 chars.");
+      return;
+    }
+    const age = parseInt(newAge);
+    if (age < 1 || age > 120) {
+      alert("Please enter valid age (1-120).");
+      return;
+    }
+    const newUser = {
+      id: users.length + 1,
+      name: newName,
+      age: age,
+    };
+    setUsers([...users, newUser]);
+    setNewName("");
+    setNewAge("");
+  };
+
   const handleDelete = (id) => {
     const updatedUsers = users.filter((user) => user.id !== id);
     setUsers(updatedUsers);
@@ -25,11 +53,40 @@ function App() {
     backgroundColor: "#f9f9f9",
     borderRadius: "5px",
     boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
+    display: "flex",
+    justifyContent: "space-between",
+    alignItems: "center",
   };
 
   return (
     <div>
-      <h1>Styled List of Objectives rendered..</h1>
+      <h1>React Forms: Add new User</h1>
+      {/* Form section */}
+      <form onSubmit={handleAddUser} style={{ marginBottom: "20px" }}>
+        <div>
+          <input
+            type="text"
+            placeholder="Enter name.."
+            value={newName}
+            onChange={(e) => setNewName(e.target.value)}
+            style={{ marginRight: "10px", padding: "5px" }}
+          />
+          <span>{newName.length}/20 characters</span>
+        </div>
+        <div style={{ marginTop: "10px" }}>
+          <input
+            type="number"
+            placeholder="Enter age.."
+            value={newAge}
+            onChange={(e) => setNewAge(e.target.value)}
+            style={{ marginRight: "10px", padding: "5px" }}
+          />
+        </div>
+        <button type="submit" style={{ padding: "5px 10px" }}>
+          Add User
+        </button>
+      </form>
+      {/* User list section */}
       <ul style={listStyle}>
         {users.map((user) => (
           <li key={user.id} style={listItemStyle}>
