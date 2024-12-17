@@ -28,3 +28,21 @@ Delete unnecessary files: In the src/ folder, delete:
 - Update index.js: Remove references to reportWebVitals
 - Update App.js: Replace the existing code with a simple Hello World:
 - Remove unused styles in index.css and App.css if you like.
+
+
+## create components
+in app.js
+
+## props
+used to transfer data between parent and child components in React.
+
+## state
+What is State?
+
+State allows components to manage their own data.
+
+State is used for data that can change over time (like a button toggle, user input, etc.). When the state changes, React re-renders the component, updating the UI accordingly.
+
+- State allows a component to track data that can change over time.
+- The useState hook returns an array: the first element is the state value, and the second is the function to update it.
+- When state changes, React re-renders the component to reflect the new state.
