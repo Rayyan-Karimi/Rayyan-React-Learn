@@ -46,3 +46,16 @@ State is used for data that can change over time (like a button toggle, user inp
 - State allows a component to track data that can change over time.
 - The useState hook returns an array: the first element is the state value, and the second is the function to update it.
 - When state changes, React re-renders the component to reflect the new state.
+
+## TAILWIND SETUP
+- `npm install -D tailwindcss postcss autoprefixer`
+- `npx tailwindcss init`
+- Update tailwind.css for:
+- - `content: ['./src/**/*.{js,jsx,ts,tsx}'],`
+- Add Tailwinds directives to src/index.css
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;

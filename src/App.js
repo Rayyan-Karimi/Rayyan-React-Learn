@@ -42,58 +42,80 @@ function App() {
     setUsers(updatedUsers);
   };
 
-  const listStyle = {
-    listStyleType: "none",
-    padding: 0,
-  };
-
-  const listItemStyle = {
-    margin: "10px 0",
-    padding: "10px",
-    backgroundColor: "#f9f9f9",
-    borderRadius: "5px",
-    boxShadow: "0 2px 4px rgba(0,0,0,0.1)",
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "center",
-  };
-
   return (
-    <div>
-      <h1>React Forms: Add new User</h1>
-      {/* Form section */}
-      <form onSubmit={handleAddUser} style={{ marginBottom: "20px" }}>
-        <div>
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4">
+      <h1 className="text-3xl font-bold text-gray-800 mb-8">User List</h1>
+
+      {/* Form Section */}
+      <form
+        onSubmit={handleAddUser}
+        className="bg-white shadow-md rounded-lg p-6 w-full max-w-md mb-6"
+      >
+        <div className="mb-4">
+          <label
+            htmlFor="name"
+            className="block text-gray-700 font-semibold mb-2"
+          >
+            Name
+          </label>
           <input
             type="text"
-            placeholder="Enter name.."
+            id="name"
+            placeholder="Enter name"
             value={newName}
             onChange={(e) => setNewName(e.target.value)}
-            style={{ marginRight: "10px", padding: "5px" }}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
-          <span>{newName.length}/20 characters</span>
+          <span
+            className={`text-sm px-2 ${
+              newName.length > 20 ? "text-red-500" : "text-blue-500"
+            }`}
+          >
+            {newName.length}/20 characters
+          </span>
         </div>
-        <div style={{ marginTop: "10px" }}>
+
+        <div className="mb-4">
+          <label
+            htmlFor="age"
+            className="block text-gray-700 font-semibold mb-2"
+          >
+            Age
+          </label>
           <input
             type="number"
-            placeholder="Enter age.."
+            id="age"
+            placeholder="Enter age"
             value={newAge}
             onChange={(e) => setNewAge(e.target.value)}
-            style={{ marginRight: "10px", padding: "5px" }}
+            className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
           />
         </div>
-        <button type="submit" style={{ padding: "5px 10px" }}>
+
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-200"
+        >
           Add User
         </button>
       </form>
-      {/* User list section */}
-      <ul style={listStyle}>
+
+      {/* User List Section */}
+      <ul className="w-full max-w-md space-y-4">
         {users.map((user) => (
-          <li key={user.id} style={listItemStyle}>
+          <li
+            key={user.id}
+            className="bg-white shadow rounded-lg p-4 flex justify-between items-center"
+          >
             <span>
-              {user.name} is {user.age} years old.
+              <strong>{user.name}</strong>, {user.age} years old
             </span>
-            <button onClick={() => handleDelete(user.id)}>Delete user</button>
+            <button
+              onClick={() => handleDelete(user.id)}
+              className="text-red-500 hover:text-red-600 transition"
+            >
+              Delete
+            </button>
           </li>
         ))}
       </ul>
